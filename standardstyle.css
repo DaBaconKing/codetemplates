@@ -1,19 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-.cta{
+.cta {
   border-radius: 1em;
-  border-color: #2b7dda;
-  /* Add padding, background, or other styles for a button-like appearance */
-    padding: 15px25px;
+  border: 1px solid #2b7dda; /* Corrected: Used shorthand and a solid style */
+  padding: 15px 25px; /* Corrected: Space is required between values */
 }
 
-.rightaligned{
-    position: fixed; /* Positions the element relative to the viewport */
-  bottom: 20px;   /* Positions it 20px from the bottom of the screen */
-  right: 20px;    /* Positions it 20px from the right of the screen */
+.rightaligned {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
 
 .cta a {
-    font-family: 'Montserrat' serif;
-    color: rgb(49, 43, 43);
+  font-family: 'Montserrat', sans-serif; /* Corrected: Added fallback font */
+  color: rgb(49, 43, 43);
+  text-decoration: none; /* Recommended: Removes the default underline from links */
 }
+
+/* code made by DaBaconKing */
