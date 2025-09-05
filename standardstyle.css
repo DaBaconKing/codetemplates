@@ -12,6 +12,17 @@
   transition: 150ms ease;
 }
 
+
+.cta:hover {
+  scale: 1.05;
+  border: #2b7dda;
+  text-decoration: underline;
+}
+
+body {
+  background-color: var(--bgcolor);
+}
+
 .rightaligned {
   position: fixed;
   bottom: 20px;
@@ -31,3 +42,4 @@
   margin: 0px;
   padding: 0px;
 }
+
