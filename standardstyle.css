@@ -19,6 +19,10 @@
   text-decoration: underline;
 }
 
+.cta:active{
+  scale: 0.95; 
+}
+
 body {
   background-color: var(--bgcolor);
 }
@@ -42,4 +46,5 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
 
