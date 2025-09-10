@@ -3,49 +3,25 @@
 .cta {
   cursor: pointer;
   border-radius: 1em;
-  border: 8px solid transparent; /* Keeps the spacing consistent */
-  background-color: #2b7dda;
-  padding: 15px 25px;
-  font-family: 'Montserrat', sans-serif;
+  border: var(--bgcolor);
+  background-color: #2b7dda; /* Corrected: Used shorthand and a solid style */
+  padding: 15px 25px; /* Corrected: Space is required between values */
+  font-family: 'Montserrat', sans-serif; /* Corrected: Added fallback font */
   color: var(--txtcolor);
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  transition: transform 150ms ease;
-  z-index: 1; /* Ensures the button is above the border */
+  text-decoration: none; /* Recommended: Removes the default underline from links */
+  transition: 150ms ease;
 }
 
-/* Pseudo-element for the expanding border */
-.cta::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0; /* Start with no width */
-  border-radius: 1em;
-  border: 2px solid var(--accentcolor2);
-  /* The border scale happens automatically because this pseudo-element is a child of .cta. */
-  /* To ensure the pseudo-element also scales, we add the same transition. */
-  transition: width 0.3s ease, transform 150ms ease;
-  z-index: -1; /* Ensures the border is behind the button content */
-}
-
-/* On hover, grow the border from left to full and scale the button */
-.cta:hover::after {
-  width: 100%;
-}
 
 .cta:hover {
-  transform: scale(1.05); /* Scales the button, its content, and its ::after pseudo-element */
+  scale: 1.05;
+  border: #2b7dda;
   text-decoration: underline;
 }
 
-.cta:active {
-  transform: scale(0.95);
+.cta:active{
+  scale: 0.95; 
 }
-
-
 
 body {
   background-color: var(--bgcolor);
@@ -70,6 +46,4 @@ body {
   margin: 0px;
   padding: 0px;
 }
-
-
 
