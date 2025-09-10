@@ -1,37 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
 .cta {
+  display: inline-block;          /* keeps padding/transform stable */
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
   border-radius: 1em;
-  border: 2px solid transparent; /* Start invisible */
   background-color: #2b7dda;
   padding: 15px 25px;
   font-family: 'Montserrat', sans-serif;
   color: var(--txtcolor);
   text-decoration: none;
-  position: relative; /* Needed for ::after */
-  overflow: hidden;   /* Keeps the animation inside */
   transition: transform 150ms ease;
+  box-sizing: border-box;
+  border: 0;                       /* remove any real border so pseudo handles it */
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Pseudo-element for sliding border */
-.cta::after {
+/* sliding 'border' rendered via inset box-shadow on the pseudo element */
+.cta::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0; /* Start with no width */
-  border-radius: 1em;
-  border: 2px solid var(--accentcolor2);
-  transition: width 0.3s ease;
+  inset: 0;
+  pointer-events: none;            /* so the pseudo-element doesn't block clicks */
+  border-radius: inherit;
+  box-sizing: border-box;
+  /* draw the border as an inset box-shadow so it doesn't shift layout */
+  box-shadow: inset 0 0 0 2px var(--accentcolor2);
+  transform-origin: left center;   /* slide from left */
+  transform: scaleX(0);            /* start collapsed */
+  transition: transform 300ms cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+  z-index: 1;                       /* sits above background but below text */
 }
 
-/* On hover, grow the border from left to full */
-.cta:hover::after {
-  width: 100%;
+/* show the border on hover/focus (slides in) */
+.cta:hover::before,
+.cta:focus::before {
+  transform: scaleX(1);
 }
 
+/* keep the scale hover/active affordances (use transform, not `scale:`) */
 .cta:hover {
   transform: scale(1.05);
   text-decoration: underline;
@@ -41,30 +48,12 @@
   transform: scale(0.95);
 }
 
-
-body {
-  background-color: var(--bgcolor);
+/* optional: remove default focus outline, add your own if needed for accessibility */
+.cta:focus {
+  outline: none;
+  /* If you want a visible focus ring for keyboard users, add one here */
+  /* box-shadow: 0 0 0 3px rgba(66,153,225,0.35); */
 }
 
-.rightaligned {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-}
-
-.leftaligned {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-}
-
-*{
-  font-family: 'Montserrat', sans-serif;
-  color: var(--txtcolor);
-  text-decoration: none;
-  margin: 0px;
-  padding: 0px;
-}
-
-
-
+/* If your text ever appears under the border, increase z-index of content:
+   you may wrap text in a span and set .cta > span { position: relative; z-index: 2; } */
