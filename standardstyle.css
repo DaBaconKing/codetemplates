@@ -3,18 +3,19 @@
 .cta {
   cursor: pointer;
   border-radius: 1em;
-  border: 2px solid transparent; /* Start invisible */
+  border: 8px solid transparent; /* Keeps the spacing consistent */
   background-color: #2b7dda;
   padding: 15px 25px;
   font-family: 'Montserrat', sans-serif;
   color: var(--txtcolor);
   text-decoration: none;
-  position: relative; /* Needed for ::after */
-  overflow: hidden;   /* Keeps the animation inside */
+  position: relative;
+  overflow: hidden;
   transition: transform 150ms ease;
+  z-index: 1; /* Ensures the button is above the border */
 }
 
-/* Pseudo-element for sliding border */
+/* Pseudo-element for the expanding border */
 .cta::after {
   content: "";
   position: absolute;
@@ -24,22 +25,26 @@
   width: 0; /* Start with no width */
   border-radius: 1em;
   border: 2px solid var(--accentcolor2);
-  transition: width 0.3s ease;
+  /* The border scale happens automatically because this pseudo-element is a child of .cta. */
+  /* To ensure the pseudo-element also scales, we add the same transition. */
+  transition: width 0.3s ease, transform 150ms ease;
+  z-index: -1; /* Ensures the border is behind the button content */
 }
 
-/* On hover, grow the border from left to full */
+/* On hover, grow the border from left to full and scale the button */
 .cta:hover::after {
   width: 100%;
 }
 
 .cta:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Scales the button, its content, and its ::after pseudo-element */
   text-decoration: underline;
 }
 
 .cta:active {
   transform: scale(0.95);
 }
+
 
 
 body {
@@ -65,5 +70,6 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
 
 
