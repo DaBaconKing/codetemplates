@@ -3,25 +3,44 @@
 .cta {
   cursor: pointer;
   border-radius: 1em;
-  border: var(--bgcolor);
-  background-color: #2b7dda; /* Corrected: Used shorthand and a solid style */
-  padding: 15px 25px; /* Corrected: Space is required between values */
-  font-family: 'Montserrat', sans-serif; /* Corrected: Added fallback font */
+  border: 2px solid transparent; /* Start invisible */
+  background-color: #2b7dda;
+  padding: 15px 25px;
+  font-family: 'Montserrat', sans-serif;
   color: var(--txtcolor);
-  text-decoration: none; /* Recommended: Removes the default underline from links */
-  transition: 150ms ease;
+  text-decoration: none;
+  position: relative; /* Needed for ::after */
+  overflow: hidden;   /* Keeps the animation inside */
+  transition: transform 150ms ease;
 }
 
+/* Pseudo-element for sliding border */
+.cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0; /* Start with no width */
+  border-radius: 1em;
+  border: 2px solid var(--accentcolor2);
+  transition: width 0.3s ease;
+}
+
+/* On hover, grow the border from left to full */
+.cta:hover::after {
+  width: 100%;
+}
 
 .cta:hover {
-  scale: 1.05;
-  border: #2b7dda;
+  transform: scale(1.05);
   text-decoration: underline;
 }
 
-.cta:active{
-  scale: 0.95; 
+.cta:active {
+  transform: scale(0.95);
 }
+
 
 body {
   background-color: var(--bgcolor);
@@ -46,5 +65,6 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
 
 
